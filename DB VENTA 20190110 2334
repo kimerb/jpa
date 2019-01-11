@@ -1,0 +1,315 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.7.21
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema venta
+--
+
+CREATE DATABASE IF NOT EXISTS venta;
+USE venta;
+
+--
+-- Definition of table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+CREATE TABLE `categoria` (
+  `id` int(11) unsigned NOT NULL,
+  `denominacion` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categoria`
+--
+
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` (`id`,`denominacion`) VALUES 
+ (1,'Bebiba 1'),
+ (2,'Bebiba 2'),
+ (3,'Bebiba 3'),
+ (4,'Bebiba 4'),
+ (5,'Bebiba 5'),
+ (6,'Bebiba 6'),
+ (7,'Bebiba 7'),
+ (8,'Bebiba 8'),
+ (9,'Bebiba 9'),
+ (10,'Bebiba 10'),
+ (11,'Bebiba 11'),
+ (12,'Bebiba 12'),
+ (13,'Bebiba 13'),
+ (14,'Bebiba 14'),
+ (15,'Bebiba 15'),
+ (16,'Bebiba 16'),
+ (17,'Bebiba 17'),
+ (18,'Bebiba 18'),
+ (19,'Bebiba 19'),
+ (20,'Bebiba 20'),
+ (21,'Bebiba 21'),
+ (22,'Bebiba 22'),
+ (23,'Bebiba 23'),
+ (24,'Bebiba 24'),
+ (25,'Bebiba 25');
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+
+
+--
+-- Definition of table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE `cliente` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(120) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `direccion` varchar(160) NOT NULL,
+  `dni` char(8) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cliente`
+--
+
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` (`id`,`nombre`,`apellido`,`direccion`,`dni`) VALUES 
+ (1,'Elmer 1','Blas 1','Huaraz 1','00000001'),
+ (2,'Elmer 2','Blas 2','Huaraz 2','00000002'),
+ (3,'Elmer 3','Blas 3','Huaraz 3','00000003'),
+ (4,'Elmer 4','Blas 4','Huaraz 4','00000004'),
+ (5,'Elmer 5','Blas 5','Huaraz 5','00000005'),
+ (6,'Elmer 6','Blas 6','Huaraz 6','00000006'),
+ (7,'Elmer 7','Blas 7','Huaraz 7','00000007'),
+ (8,'Elmer 8','Blas 8','Huaraz 8','00000008'),
+ (9,'Elmer 9','Blas 9','Huaraz 9','00000009'),
+ (10,'Elmer 10','Blas 10','Huaraz 10','00000010'),
+ (11,'Elmer 11','Blas 11','Huaraz 11','00000011'),
+ (12,'Elmer 12','Blas 12','Huaraz 12','00000012'),
+ (13,'Elmer 13','Blas 13','Huaraz 13','00000013'),
+ (14,'Elmer 14','Blas 14','Huaraz 14','00000014'),
+ (15,'Elmer 15','Blas 15','Huaraz 15','00000015'),
+ (16,'Elmer 16','Blas 16','Huaraz 16','00000016'),
+ (17,'Elmer 17','Blas 17','Huaraz 17','00000017'),
+ (18,'Elmer 18','Blas 18','Huaraz 18','00000018'),
+ (19,'Elmer 19','Blas 19','Huaraz 19','00000019'),
+ (20,'Elmer 20','Blas 20','Huaraz 20','00000020'),
+ (21,'Elmer 21','Blas 21','Huaraz 21','00000021'),
+ (22,'Elmer 22','Blas 22','Huaraz 22','00000022'),
+ (23,'Elmer 23','Blas 23','Huaraz 23','00000023'),
+ (24,'Elmer 24','Blas 24','Huaraz 24','00000024'),
+ (25,'Elmer 25','Blas 25','Huaraz 25','00000025');
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+
+
+--
+-- Definition of table `detalle`
+--
+
+DROP TABLE IF EXISTS `detalle`;
+CREATE TABLE `detalle` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `precio` decimal(10,2) unsigned NOT NULL,
+  `cantidad` int(11) unsigned NOT NULL,
+  `producto_id` int(11) unsigned NOT NULL,
+  `factura_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_detalle_producto1_idx` (`producto_id`),
+  KEY `fk_detalle_factura1_idx` (`factura_id`),
+  CONSTRAINT `fk_detalle_factura1_idx` FOREIGN KEY (`factura_id`) REFERENCES `factura` (`id`),
+  CONSTRAINT `fk_detalle_producto1_idx` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `detalle`
+--
+
+/*!40000 ALTER TABLE `detalle` DISABLE KEYS */;
+INSERT INTO `detalle` (`id`,`precio`,`cantidad`,`producto_id`,`factura_id`) VALUES 
+ (1,'12.00',10,13,1),
+ (2,'12.00',10,10,1),
+ (3,'12.00',10,19,1),
+ (4,'12.00',10,21,1),
+ (5,'12.00',10,3,2),
+ (6,'12.00',10,25,2),
+ (7,'12.00',10,25,2),
+ (8,'12.00',10,16,2),
+ (9,'12.00',10,18,3),
+ (10,'12.00',10,19,3),
+ (11,'12.00',10,1,4),
+ (12,'12.00',10,14,4),
+ (13,'12.00',10,5,5),
+ (14,'12.00',10,8,5),
+ (15,'12.00',10,2,5),
+ (16,'12.00',10,23,6),
+ (17,'12.00',10,1,7),
+ (18,'12.00',10,22,7),
+ (19,'12.00',10,11,7),
+ (20,'12.00',10,21,7),
+ (21,'12.00',10,9,7),
+ (22,'12.00',10,5,8),
+ (23,'12.00',10,13,8),
+ (24,'12.00',10,25,9),
+ (25,'12.00',10,4,9),
+ (26,'12.00',10,15,9),
+ (27,'12.00',10,6,10),
+ (28,'12.00',10,18,11),
+ (29,'12.00',10,4,11),
+ (30,'12.00',10,15,11),
+ (31,'12.00',10,4,11),
+ (32,'12.00',10,3,12),
+ (33,'12.00',10,15,12),
+ (34,'12.00',10,10,12),
+ (35,'12.00',10,14,13),
+ (36,'12.00',10,2,13),
+ (37,'12.00',10,10,14),
+ (38,'12.00',10,12,14),
+ (39,'12.00',10,8,14),
+ (40,'12.00',10,14,14),
+ (41,'12.00',10,11,14),
+ (42,'12.00',10,25,15),
+ (43,'12.00',10,19,15),
+ (44,'12.00',10,14,16),
+ (45,'12.00',10,5,16),
+ (46,'12.00',10,9,17),
+ (47,'12.00',10,15,18),
+ (48,'12.00',10,19,18),
+ (49,'12.00',10,13,19),
+ (50,'12.00',10,14,19),
+ (51,'12.00',10,4,19),
+ (52,'12.00',10,2,19),
+ (53,'12.00',10,22,20),
+ (54,'12.00',10,1,20),
+ (55,'12.00',10,14,20),
+ (56,'12.00',10,2,21),
+ (57,'12.00',10,11,21),
+ (58,'12.00',10,22,22),
+ (59,'12.00',10,20,22),
+ (60,'12.00',10,10,23),
+ (61,'12.00',10,24,23),
+ (62,'12.00',10,20,23),
+ (63,'12.00',10,8,23),
+ (64,'12.00',10,22,24),
+ (65,'12.00',10,12,24),
+ (66,'12.00',10,7,24),
+ (67,'12.00',10,16,25);
+/*!40000 ALTER TABLE `detalle` ENABLE KEYS */;
+
+
+--
+-- Definition of table `factura`
+--
+
+DROP TABLE IF EXISTS `factura`;
+CREATE TABLE `factura` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `numero` int(7) unsigned zerofill NOT NULL,
+  `fecha` date DEFAULT NULL,
+  `cliente_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_factura_cliente1_idx` (`cliente_id`),
+  CONSTRAINT `fk_factura_cliente1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `factura`
+--
+
+/*!40000 ALTER TABLE `factura` DISABLE KEYS */;
+INSERT INTO `factura` (`id`,`numero`,`fecha`,`cliente_id`) VALUES 
+ (1,0000001,'2019-01-09',23),
+ (2,0000002,'2019-01-09',20),
+ (3,0000003,'2019-01-09',16),
+ (4,0000004,'2019-01-09',8),
+ (5,0000005,'2019-01-09',25),
+ (6,0000006,'2019-01-09',3),
+ (7,0000007,'2019-01-09',18),
+ (8,0000008,'2019-01-09',10),
+ (9,0000009,'2019-01-09',10),
+ (10,0000010,'2019-01-09',12),
+ (11,0000011,'2019-01-09',25),
+ (12,0000012,'2019-01-09',25),
+ (13,0000013,'2019-01-09',9),
+ (14,0000014,'2019-01-09',7),
+ (15,0000015,'2019-01-09',3),
+ (16,0000016,'2019-01-09',13),
+ (17,0000017,'2019-01-09',18),
+ (18,0000018,'2019-01-09',10),
+ (19,0000019,'2019-01-09',12),
+ (20,0000020,'2019-01-09',22),
+ (21,0000021,'2019-01-09',22),
+ (22,0000022,'2019-01-09',7),
+ (23,0000023,'2019-01-09',13),
+ (24,0000024,'2019-01-09',24),
+ (25,0000025,'2019-01-09',24);
+/*!40000 ALTER TABLE `factura` ENABLE KEYS */;
+
+
+--
+-- Definition of table `producto`
+--
+
+DROP TABLE IF EXISTS `producto`;
+CREATE TABLE `producto` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) DEFAULT NULL,
+  `stock` int(11) NOT NULL,
+  `categoria_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `producto`
+--
+
+/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` (`id`,`nombre`,`stock`,`categoria_id`) VALUES 
+ (1,'Producto 1',74,3),
+ (2,'Producto 2',43,1),
+ (3,'Producto 3',38,3),
+ (4,'Producto 4',102,6),
+ (5,'Producto 5',89,17),
+ (6,'Producto 6',28,6),
+ (7,'Producto 7',197,7),
+ (8,'Producto 8',99,8),
+ (9,'Producto 9',89,5),
+ (10,'Producto 10',52,6),
+ (11,'Producto 11',191,21),
+ (12,'Producto 12',187,17),
+ (13,'Producto 13',87,24),
+ (14,'Producto 14',89,6),
+ (15,'Producto 15',132,5),
+ (16,'Producto 16',155,3),
+ (17,'Producto 17',108,25),
+ (18,'Producto 18',102,6),
+ (19,'Producto 19',141,16),
+ (20,'Producto 20',65,10),
+ (21,'Producto 21',107,11),
+ (22,'Producto 22',34,20),
+ (23,'Producto 23',62,6),
+ (24,'Producto 24',178,25),
+ (25,'Producto 25',183,16);
+/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
