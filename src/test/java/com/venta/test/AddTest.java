@@ -60,8 +60,8 @@ public class AddTest {
 			//Date fecha = df.parse("2019-01-12");
 			Date fecha = new Date();
 			Cliente cliente_id = en.find(Cliente.class, (int)(Math.random()*n)+1);
-			Factura c = new Factura(i, i, fecha, cliente_id);
-			en.persist(c);
+			Factura f = new Factura(i, i, fecha, cliente_id);
+			en.persist(f);
 			// DETALLE
 			int nd = i>20? Math.round(i/4) : 5;
 			for (int J=1; J<=Math.random()*nd+1; J++) {
